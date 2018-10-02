@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 
 //another components
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from '@firebase/app';
-import ReduxThunk from 'ReduxThunk';
+import ReduxThunk from 'redux-thunk';
 
 //my components
 import Route from './src/Route.js';
@@ -25,7 +25,7 @@ export default class App extends Component {
 
   render() {
     return(
-        <Provider store={ createStore(reducers) }>
+        <Provider store={ createStore( reducers, {}, applyMiddleware(ReduxThunk)) }>
           <Route />
         </Provider>
     );
