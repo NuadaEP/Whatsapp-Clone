@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import firebase from '@firebase/app';
-// import ReduxThunk from 'ReduxThunk';
+import ReduxThunk from 'ReduxThunk';
 
 //my components
 import Route from './src/Route.js';
