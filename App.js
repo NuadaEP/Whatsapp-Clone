@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 //another components
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import firebase from 'firebase';
+import firebase from '@firebase/app';
 // import ReduxThunk from 'ReduxThunk';
 
 //my components
@@ -12,7 +12,6 @@ import Route from './src/Route.js';
 import reducers from './src/reducers';
 
 export default class App extends Component {
-
   componentWillMount(){
      firebase.initializeApp({
        apiKey: "AIzaSyCc59xH6gkZcGCB485K1RDyiLsr7AR9aW8",
