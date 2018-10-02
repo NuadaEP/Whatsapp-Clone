@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from '@firebase/auth';
 
 export const modificaEmail = (text) => {
 	return{
