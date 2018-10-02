@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, Image } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { modificaEmail, modificaSenha } from '../actions/AutenticacaoActions';
 
@@ -10,7 +10,7 @@ class FormLogin extends Component{
 
 	render() {
 		return(	
-			<Image style={ styles.imageBackground } source={ require('../images/bg.png') } >
+			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
 				<View style={ styles.mainView }>
 					<View style={ styles.headerView }>
 						<Text style={ styles.headerText }>WhatsApp Clone</Text>
@@ -48,7 +48,7 @@ class FormLogin extends Component{
 						/>
 					</View>
 				</View>
-			</Image>	
+			</ImageBackground>	
 		);
 	}
 }
