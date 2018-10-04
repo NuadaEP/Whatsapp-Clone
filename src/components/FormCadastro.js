@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
 	formInput: {
 		height: 45,
 		fontSize: 20,
+		borderBottomColor: '#fff',
+		borderBottomWidth: 0.9
 	},
 	buttonView: {
 		flex: 1
@@ -86,8 +88,8 @@ const mapStateToProps  = state => ({
 });
 
 export default connect(mapStateToProps, { 
-	modificaEmail: modificaEmail, 
-	modificaSenha: modificaSenha, 
-	modificaNome: modificaNome ,
-	cadastraUsuario: cadastraUsuario
+	modificaEmail, 
+	modificaSenha, 
+	modificaNome ,
+	cadastraUsuario
 }) (FormCadastro);

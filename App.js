@@ -9,7 +9,7 @@ import ReduxThunk from 'redux-thunk';
 
 //my components
 import Route from './src/Route.js';
-import reducers from './src/reducers';
+import reducers from './src/reducers/index.js';
 
 export default class App extends Component {
   componentWillMount(){

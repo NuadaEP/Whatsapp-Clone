@@ -1,6 +1,14 @@
 import firebase from '@firebase/auth';
 
+//action creators are functions that return actions
+//this actions are interpretate to Provider (at App.js), and with this action his decide what he must do
+
+//each function is exported here and imported by the component that need it (FormLogin and FormCadastro)
+
+//this is a action creator
 export const modificaEmail = (text) => {
+	//his return is the action
+	//this action goin to be catch to action property on our reducer (AutenticacaoReducer.js)
 	return{
 		type: 'modifica_email',
 		payload: text

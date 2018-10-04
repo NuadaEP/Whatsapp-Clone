@@ -3,6 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBac
 import { createStackNavigator } from 'react-navigation';
 import { modificaEmail, modificaSenha } from '../actions/AutenticacaoActions';
 
+//this component is used at the end of the file
+//his function is to connect react-native at redux, to allows that us use it's variables on any place that you need
 import { connect } from 'react-redux';
 
 class FormLogin extends Component{
@@ -77,6 +79,8 @@ const styles = StyleSheet.create({
 	formInput: {
 		fontSize: 20,
 		height: 45,
+		borderBottomColor: '#fff',
+		borderBottomWidth: 0.9
 	},
 	textLink: {
 		color: '#fff',
@@ -86,6 +90,7 @@ const styles = StyleSheet.create({
 	}
 });
 
+//this function can bring the states variables (states) of redux as properties (props) to component 
 const mapStateToProps = state => (
 	{
 		email: state.AutenticacaoReducer.email,	
@@ -93,4 +98,11 @@ const mapStateToProps = state => (
 	}
 );
 
+//to pass this states to props on our component, we should to connect this two resources
+//the first parentheses passes which props, of this component, that goin to receive those states of redux
+//the second one informs the model which component it refers
+//after to connect, we can recover this states as props at our class, like on the inputText component 
+
+//into first parentheses we have the actions that allows us to modificate our fields, this goin to pass as props to our class
+//remembering that if the name of key (at json parameters (modificaEmail for example)) is the same name of value, you just can omit it 
 export default connect(mapStateToProps, { modificaEmail, modificaSenha })(FormLogin);
