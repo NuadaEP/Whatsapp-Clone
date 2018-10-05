@@ -3,6 +3,8 @@ const INITIAL_STATE = {
 	nome: '',
 	email: '',
 	senha: '',
+	erroCadastro: '',
+	sucessoCadastro: ''
 }
 
 //this reducer is exported and imported by index file, on this directory
@@ -30,9 +32,13 @@ export default (state = INITIAL_STATE, action) => {
 	if (action.type == "modifica_nome") {
 		return { ...state, nome: action.payload }
 	}
+	
+	if (action.type == "cadastro_usuario_sucesso") {
+		return { ...state, sucessoCadastro: action.payload }
+	}
 
-	if (action.type == "erro") {
-		alert('Erro');
+	if (action.type == "cadastro_usuario_erro") {
+		return { ...state, erroCadastro: action.payload }
 	}
 	return state;
 }

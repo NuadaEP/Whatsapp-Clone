@@ -41,9 +41,9 @@ export const cadastraUsuario = ({ nome, email, senha }) => {
 }
 
 const cadastraUsuarioSucesso = (dispatch) => {
-	dispatch({ type: 'sucesso' });
+	dispatch({ type: 'cadastro_usuario_sucesso', payload: 'Sucesso ao cadatrar' });
 }
 
 const cadastraUsuarioErro = (erro, dispatch) => {
-	dispatch({ type: 'erro' });
+	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
 }
