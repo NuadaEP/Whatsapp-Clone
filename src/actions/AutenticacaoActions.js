@@ -1,4 +1,4 @@
-import firebase from '@firebase/auth';
+import firebase from 'firebase/auth';
 
 //action creators are functions that return actions
 //this actions are interpretate to Provider (at App.js), and with this action his decide what he must do
@@ -31,19 +31,19 @@ export const modificaNome = (text) => {
 
 export const cadastraUsuario = ({ nome, email, senha }) => {
 
-	firebase.auth().createUserWithEmailAndPassword(email, senha)
-		.then(user => cadastraUsuarioSucesso())
-		.catch(erro => cadastraUsuarioErro(erro));
+	//dispatch goin to return the action of success or error of redux to store
+	//store is the only place of true of our aplication
+	return dispatch => (
+		firebase.auth().createUserWithEmailAndPassword(email, senha)
+			.then(user => cadastraUsuarioSucesso(dispatch))
+			.catch(erro => cadastraUsuarioErro(erro, dispatch))
+	)
 }
 
-const cadastraUsuarioSucesso = () => {
-	return{
-		type: 'sucesso'
-	};
+const cadastraUsuarioSucesso = (dispatch) => {
+	dispatch({ type: 'sucesso' });
 }
 
-const cadastraUsuarioErro = (erro) => {
-	return{
-		type: 'erro'
-	};
+const cadastraUsuarioErro = (erro, dispatch) => {
+	dispatch({ type: 'erro' });
 }

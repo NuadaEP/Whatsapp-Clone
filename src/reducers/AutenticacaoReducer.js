@@ -30,5 +30,9 @@ export default (state = INITIAL_STATE, action) => {
 	if (action.type == "modifica_nome") {
 		return { ...state, nome: action.payload }
 	}
+
+	if (action.type == "erro") {
+		alert('Erro');
+	}
 	return state;
 }

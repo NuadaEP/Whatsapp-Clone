@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 //another components
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import firebase from '@firebase/app';
+import firebase from '@firebase';
 import ReduxThunk from 'redux-thunk';
 
 //my components
