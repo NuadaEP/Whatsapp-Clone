@@ -37,16 +37,16 @@ export const cadastraUsuario = ({ nome, email, senha }) => {
 	//store is the only place of true of our aplication
 	return dispatch => (
 		firebase.auth().createUserWithEmailAndPassword(email, senha)
-			.then(user => cadastraUsuarioSucesso(dispatch))
+			.then(user => createStackNavigator.props.navigation.navigate('BoasVindas'))
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
 	)
 }
 
-const cadastraUsuarioSucesso = (dispatch) => {
-	dispatch({ type: 'cadastro_usuario_sucesso' });
+// const cadastraUsuarioSucesso = (dispatch) => {
+// 	// dispatch({ type: 'cadastro_usuario_sucesso' });
 
-	createStackNavigator.props.navigation.navigate('BoasVindas');
-}
+// 	this.props.navigation.navigate('BoasVindas');
+// }
 
 export const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });

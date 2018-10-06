@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, Image, ImageBackground } from 'react-native';
 
-export default props => (
+export default (props) => (
 	<ImageBackground style={{ flex: 1, width: null }} source={ require('../images/bg.png') } >
 
 		<View style={{ flex: 1, padding: 15 }}>
