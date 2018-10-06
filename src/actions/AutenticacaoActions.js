@@ -1,6 +1,7 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
 
+import { createStackNavigator } from 'react-navigation';
 
 //action creators are functions that return actions
 //this actions are interpretate to Provider (at App.js), and with this action his decide what he must do
@@ -42,9 +43,11 @@ export const cadastraUsuario = ({ nome, email, senha }) => {
 }
 
 const cadastraUsuarioSucesso = (dispatch) => {
-	dispatch({ type: 'cadastro_usuario_sucesso', payload: 'Sucesso ao cadatrar' });
+	dispatch({ type: 'cadastro_usuario_sucesso' });
+
+	createStackNavigator.props.navigation.navigate('BoasVindas');
 }
 
-const cadastraUsuarioErro = (erro, dispatch) => {
+export const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
 }

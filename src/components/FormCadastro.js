@@ -45,7 +45,6 @@ class FormCadastro extends Component{
 						/>
 
 						<Text style={ styles.erro }>{this.props.erroCadastro}</Text>
-						<Text style={ styles.sucesso }>{this.props.sucessoCadastro}</Text>
 					</View>
 
 					<View style={ styles.buttonView }>
@@ -83,9 +82,6 @@ const styles = StyleSheet.create({
 	erro: {
 		color: 'red'
 	},
-	sucesso: {
-		color: 'green'
-	},	
 });
 
 const mapStateToProps  = state => ({
@@ -93,7 +89,7 @@ const mapStateToProps  = state => ({
 	email: state.AutenticacaoReducer.email,
 	senha: state.AutenticacaoReducer.senha,
 	erroCadastro: state.AutenticacaoReducer.erroCadastro,
-	sucessoCadastro: state.AutenticacaoReducer.erroCadastro,
+	sucessoCadastro: state.AutenticacaoReducer.sucessoCadastro,
 });
 
 export default connect(mapStateToProps, { 
