@@ -1,14 +1,10 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
 
-import { createStackNavigator } from 'react-navigation';
+import React, {Component} from 'react';
 
-//action creators are functions that return actions
-//this actions are interpretate to Provider (at App.js), and with this action his decide what he must do
+import { StackActions, NavigationActions } from 'react-navigation';
 
-//each function is exported here and imported by the component that need it (FormLogin and FormCadastro)
-
-//this is a action creator
 export const modificaEmail = (text) => {
 	//his return is the action
 	//this action goin to be catch to action property on our reducer (AutenticacaoReducer.js)
@@ -37,16 +33,28 @@ export const cadastraUsuario = ({ nome, email, senha }) => {
 	//store is the only place of true of our aplication
 	return dispatch => (
 		firebase.auth().createUserWithEmailAndPassword(email, senha)
-			.then(user => createStackNavigator.props.navigation.navigate('BoasVindas'))
+			.then(user => cadastraUsuarioTeste.cadastraUsuarioSucesso())
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
 	)
 }
 
-// const cadastraUsuarioSucesso = (dispatch) => {
-// 	// dispatch({ type: 'cadastro_usuario_sucesso' });
 
-// 	this.props.navigation.navigate('BoasVindas');
-// }
+class cadastraUsuarioTeste extends Component {
+	constructor(props){
+		super(props);
+		const cadastraUsuarioSucesso = NavigationActions.navigate({ routeName: 'BoasVindas' });
+
+		this.props.navigation.dispatch(cadastraUsuarioSucesso);
+	}
+	render() {
+	return (
+		<div>
+		
+		</div>
+	)
+	}
+}
+
 
 export const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
