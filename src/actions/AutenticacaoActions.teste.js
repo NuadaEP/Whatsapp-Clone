@@ -2,8 +2,7 @@ import firebase from '@firebase/app';
 import '@firebase/auth';
 
 import React, {Component} from 'react';
-
-import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions, createStackNavigator } from 'react-navigation';
 
 export const modificaEmail = (text) => {
 	//his return is the action
@@ -28,23 +27,28 @@ export const modificaNome = (text) => {
 	};
 }
 
-export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
+export const cadastraUsuario = ({ nome, email, senha }) => {
 	//dispatch goin to return the action of success or error of redux to store
 	//store is the only place of true of our aplication
-
 	return dispatch => (
 		firebase.auth().createUserWithEmailAndPassword(email, senha)
-			.then(user => cadastraUsuarioSucesso(dispatch, navigation))
+			.then(user => cadastroUsuarioRedirect.cadastraUsuarioSucesso())
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
 	)
 }
 
-const cadastraUsuarioSucesso = (dispatch, navigation) => {
 
-	// dispatch({ type: 'cadastro_usuario_sucesso' });
-	
-	navigation.navigate('BoasVindas');
+export class cadastroUsuarioRedirect extends Component {
+	constructor(props){
+		super(props);
+		const cadastraUsuarioSucesso = () => {
+			StackActions.push({ routeName: 'BoasVindas' });
+		}
+		this.props.navigation.dispatch(this.cadastraUsuarioSucesso);
+
+	}
 }
+
 
 const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
