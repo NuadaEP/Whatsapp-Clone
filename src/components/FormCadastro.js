@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, Button, ImageBackground, Text } from 'react-native';
+
 import { modificaEmail, modificaSenha, modificaNome, cadastraUsuario } from '../actions/AutenticacaoActions';
 
 import { connect } from 'react-redux';
@@ -9,9 +10,9 @@ class FormCadastro extends Component{
 
 	_cadastraUsuario() {
 
-		const { nome, email, senha } = this.props;
+		const { nome, email, senha, navigation } = this.props;
 
-		this.props.cadastraUsuario({ nome, email, senha });
+		this.props.cadastraUsuario({ nome, email, senha, navigation });
 	}
 
 	render() {
