@@ -41,7 +41,7 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 
 const cadastraUsuarioSucesso = (dispatch, navigation) => {
 
-	// dispatch({ type: 'cadastro_usuario_sucesso' });
+	dispatch({ type: 'cadastro_usuario_sucesso' });
 	
 	navigation.navigate('BoasVindas');
 }
