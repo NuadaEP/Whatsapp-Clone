@@ -1,9 +1,8 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
+import '@firebase/database';
 
-import React, {Component} from 'react';
-
-import { StackActions, NavigationActions } from 'react-navigation';
+import b64 from 'base-64';
 
 export const modificaEmail = (text) => {
 	//his return is the action
@@ -33,15 +32,26 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 	//store is the only place of true of our aplication
 
 	return dispatch => (
-		firebase.auth().createUserWithEmailAndPassword(email, senha)
-			.then(user => cadastraUsuarioSucesso(dispatch, navigation))
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(email, senha)
+			.then(user => {
+				
+				let emailb64 = b64.encode(email);
+				
+				firebase
+					.database()
+					.ref(`/contatos/${emailb64}`)
+					.push({ nome:nome })
+					.then(value => cadastraUsuarioSucesso(dispatch, navigation))
+			})
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
 	)
 }
 
 const cadastraUsuarioSucesso = (dispatch, navigation) => {
 
-	// dispatch({ type: 'cadastro_usuario_sucesso' });
+	dispatch({ type: 'cadastro_usuario_sucesso' });
 	
 	navigation.navigate('BoasVindas');
 }
