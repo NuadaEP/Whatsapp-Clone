@@ -59,3 +59,9 @@ const cadastraUsuarioSucesso = (dispatch, navigation) => {
 const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
 }
+
+export const autenticarUsuario = () => {
+	return{
+		type: 'teste'
+	}
+}
