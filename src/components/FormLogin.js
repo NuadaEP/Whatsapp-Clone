@@ -10,9 +10,9 @@ class FormLogin extends Component{
 	static navigationOptions = { title: 'Login' };
 
 	_autenticarUsuario() {
-		const { email, senha } = this.props;
+		const { email, senha, navigation } = this.props;
 		
-		this.props.autenticarUsuario({ email, senha });
+		this.props.autenticarUsuario({ email, senha, navigation });
 	}
 
 	render() {
