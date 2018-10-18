@@ -7,10 +7,35 @@ import Principal from './components/Principal';
 
 const RootStack = createStackNavigator(
 	{
-	  Login: FormLogin,
-	  Cadastro: FormCadastro,
-		BoasVindas: BoasVindas,
-		Principal: Principal
+		Login: {
+			screen: FormLogin,
+			navigationOptions: () => ({
+				headerTransparent: true
+			})
+		},
+
+		Cadastro: {
+			screen: FormCadastro,
+			navigationOptions: () => ({
+				headerTitle: 'Cadastre-se',
+				headerStyle: {backgroundColor: '#115e54'},
+				headerTintColor: 'white',
+			})
+		},
+		
+		BoasVindas: {
+			screen: BoasVindas,
+			navigationOptions: () => ({
+				header: null
+			})
+		},
+
+		Principal: {
+			screen: Principal,
+			navigationOptions: () => ({
+				headerTransparent: true
+			})
+		}
 	},
 	{
 		initialRouteName: 'Login'

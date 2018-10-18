@@ -6,7 +6,6 @@ import { modificaEmail, modificaSenha, modificaNome, cadastraUsuario } from '../
 import { connect } from 'react-redux';
 
 class FormCadastro extends Component{
-	static navigationOptions = { title: 'Cadastro' };
 
 	_cadastraUsuario() {
 

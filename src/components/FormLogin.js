@@ -7,8 +7,7 @@ import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/Aute
 import { connect } from 'react-redux';
 
 class FormLogin extends Component{
-	static navigationOptions = { title: 'Login' };
-
+	
 	_autenticarUsuario() {
 		const { email, senha, navigation } = this.props;
 		
