@@ -12,39 +12,37 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 	//this action is sent to AutenticacaoActions.js
 	//here the reducer decide what to do with this information
-	if (action.type == "modifica_email") {
+	switch(action.type){
 		// "...state" this is a spread of JS
-		//this represents the previous state, to evolve the state and not just replace
-		/*
-			example:
-			const state = {name: 'bruno', sex: 'like'}
-			const newState = {...state, name: 'carlos'}
-			This is something like:
-			const newState = {name: 'bruno', sex: 'like', name: 'carlos'}
-			Because we have two "name" indexes the last one overwrite the first one
-		*/ 
-		return { ...state, email: action.payload }
-	}
+			//this represents the previous state, to evolve the state and not just replace
+			/*
+				example:
+				const state = {name: 'bruno', sex: 'like'}
+				const newState = {...state, name: 'carlos'}
+				This is something like:
+				const newState = {name: 'bruno', sex: 'like', name: 'carlos'}
+				Because we have two "name" indexes the last one overwrite the first one
+			*/ 
 
-	if (action.type == "modifica_senha") {
-		return { ...state, senha: action.payload }
-	}
+		case "modifica_email":
+			return { ...state, email: action.payload }
 
-	if (action.type == "modifica_nome") {
-		return { ...state, nome: action.payload }
-	}
+		case "modifica_senha":
+			return { ...state, senha: action.payload }
+		
+		case "modifica_nome":
+			return { ...state, nome: action.payload }
+		
+		case "cadastro_usuario_sucesso":
+			return { ...state, nome: '', senha: '' }
 
-	if (action.type == "cadastro_usuario_sucesso"){
-		return { ...state, nome: '', senha: '' }
-	}
+		case "cadastro_usuario_erro":
+			return { ...state, erroCadastro: action.payload }
 
-	if (action.type == "cadastro_usuario_erro") {
-		return { ...state, erroCadastro: action.payload }
+		case "login_usuario_erro":
+			return{ ...state, loginErro: action.payload }
+		
+		default: 
+			return state;
 	}
-
-	if (action.type == "login_usuario_erro") {
-		return{ ...state, loginErro: action.payload }
-	}
-
-	return state;
 }

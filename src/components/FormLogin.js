@@ -27,8 +27,8 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
-							returnKeyType={ "next" }
 							style={ styles.formInput } 
+							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
 							onChangeText={ text => this.props.modificaEmail(text) } 
 						/>
