@@ -27,7 +27,9 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							returnKeyType={ "next" }
 							style={ styles.formInput } 
+							onSubmitEditing={ () => this.second.focus() }
 							onChangeText={ text => this.props.modificaEmail(text) } 
 						/>
 
@@ -37,6 +39,7 @@ class FormLogin extends Component{
 							placeholder="Senha" 
 							placeholderTextColor="#fff"
 							style={ styles.formInput } 
+							ref={ input => this.second = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 
 						/>
 						
@@ -86,7 +89,8 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		height: 45,
 		borderBottomColor: '#fff',
-		borderBottomWidth: 0.9
+		borderBottomWidth: 0.9,
+		color: '#fff'
 	},
 	textLink: {
 		color: '#fff',
