@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoActions';
 
 //this component is used at the end of the file
@@ -13,7 +12,7 @@ class FormLogin extends Component{
 	_autenticarUsuario() {
 		const { email, senha } = this.props;
 		
-		this.props.autenticarUsuario(email, senha);
+		this.props.autenticarUsuario({ email, senha });
 	}
 
 	render() {
@@ -41,17 +40,19 @@ class FormLogin extends Component{
 							style={ styles.formInput } 
 							onChangeText={ text => this.props.modificaSenha(text) } 
 						/>
-
 						
 						<TouchableHighlight onPress={ () => this.props.navigation.navigate('Cadastro') }>
 							<Text style={ styles.textLink }>Ainda não tem cadastro? Cadastre-se!</Text>
 						</TouchableHighlight>
+
+						<Text style={{color: 'red'}}>{this.props.loginErro}</Text>
+
 					</View>
 
 					<View style={ styles.buttonView }>
 						<Button 
 							title = "Acessar"
-							onPress = { () => this._autenticarUsuario }
+							onPress = { () => this._autenticarUsuario() }
 							color = "#115e54"
 						/>
 					</View>
@@ -101,6 +102,7 @@ const mapStateToProps = state => (
 	{
 		email: state.AutenticacaoReducer.email,	
 		senha: state.AutenticacaoReducer.senha,
+		loginErro: state.AutenticacaoReducer.loginErro
 	}
 );
 

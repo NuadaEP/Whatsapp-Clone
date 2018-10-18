@@ -60,8 +60,26 @@ const cadastraUsuarioErro = (erro, dispatch) => {
 	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
 }
 
-export const autenticarUsuario = () => {
-	return{
-		type: 'teste'
+export const autenticarUsuario = ({ email, senha }) => {
+
+	return dispatch => {
+		firebase
+			.auth()
+			.signInWithEmailAndPassword(email, senha)
+			.then(sucesso => loginUsuarioSucesso(dispatch))
+			.catch(erro => loginUsuarioErro(erro, dispatch));
 	}
+}
+
+const loginUsuarioSucesso = (dispatch) => {
+	dispatch({
+		type: 'login_usuario_sucesso'
+	})
+}
+
+const loginUsuarioErro = (erro, dispatch) => {
+	dispatch({
+		type: 'login_usuario_erro',
+		payload: erro.message
+	})
 }
