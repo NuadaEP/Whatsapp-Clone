@@ -6,7 +6,6 @@ import { modificaEmail, modificaSenha, modificaNome, cadastraUsuario } from '../
 import { connect } from 'react-redux';
 
 class FormCadastro extends Component{
-	static navigationOptions = { title: 'Cadastro' };
 
 	_cadastraUsuario() {
 
@@ -25,6 +24,8 @@ class FormCadastro extends Component{
 							placeholder="Nome"
 							placeholderTextColor="#fff"
 							style={ styles.formInput } 
+							returnKeyType={ "next" }
+							onSubmitEditing={ () => this.second.focus() }
 							onChangeText={ text => this.props.modificaNome(text) } 
 						/>
 
@@ -33,6 +34,9 @@ class FormCadastro extends Component{
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
 							style={ styles.formInput } 
+							returnKeyType={ "next" }
+							onSubmitEditing={ () => this.third.focus() }
+							ref={ input => this.second = input }
 							onChangeText={ text => this.props.modificaEmail(text) } 
 						/>
 
@@ -42,6 +46,7 @@ class FormCadastro extends Component{
 							placeholder="Senha"
 							placeholderTextColor="#fff"
 							style={ styles.formInput } 
+							ref={ input => this.third = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 
 						/>
 
@@ -75,7 +80,8 @@ const styles = StyleSheet.create({
 		height: 45,
 		fontSize: 20,
 		borderBottomColor: '#fff',
-		borderBottomWidth: 0.9
+		borderBottomWidth: 0.9,
+		color: '#fff'
 	},
 	buttonView: {
 		flex: 1

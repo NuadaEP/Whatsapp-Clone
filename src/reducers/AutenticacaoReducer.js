@@ -4,7 +4,8 @@ const INITIAL_STATE = {
 	email: '',
 	senha: '',
 	erroCadastro: '',
-	sucessoCadastro: ''
+	sucessoCadastro: '',
+	loginErro: ''
 }
 
 //this reducer is exported and imported by index file, on this directory
@@ -40,5 +41,10 @@ export default (state = INITIAL_STATE, action) => {
 	if (action.type == "cadastro_usuario_erro") {
 		return { ...state, erroCadastro: action.payload }
 	}
+
+	if (action.type == "login_usuario_erro") {
+		return{ ...state, loginErro: action.payload }
+	}
+
 	return state;
 }

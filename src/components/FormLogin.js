@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import { modificaEmail, modificaSenha } from '../actions/AutenticacaoActions';
+import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoActions';
 
 //this component is used at the end of the file
 //his function is to connect react-native at redux, to allows that us use it's variables on any place that you need
 import { connect } from 'react-redux';
 
 class FormLogin extends Component{
-	static navigationOptions = { title: 'Login' };
+	
+	_autenticarUsuario() {
+		const { email, senha, navigation } = this.props;
+		
+		this.props.autenticarUsuario({ email, senha, navigation });
+	}
 
 	render() {
 		return(	
@@ -23,7 +27,9 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							returnKeyType={ "next" }
 							style={ styles.formInput } 
+							onSubmitEditing={ () => this.second.focus() }
 							onChangeText={ text => this.props.modificaEmail(text) } 
 						/>
 
@@ -33,19 +39,22 @@ class FormLogin extends Component{
 							placeholder="Senha" 
 							placeholderTextColor="#fff"
 							style={ styles.formInput } 
+							ref={ input => this.second = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 
 						/>
-
 						
 						<TouchableHighlight onPress={ () => this.props.navigation.navigate('Cadastro') }>
 							<Text style={ styles.textLink }>Ainda não tem cadastro? Cadastre-se!</Text>
 						</TouchableHighlight>
+
+						<Text style={{color: 'red'}}>{this.props.loginErro}</Text>
+
 					</View>
 
 					<View style={ styles.buttonView }>
 						<Button 
 							title = "Acessar"
-							onPress = { () => false }
+							onPress = { () => this._autenticarUsuario() }
 							color = "#115e54"
 						/>
 					</View>
@@ -80,7 +89,8 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		height: 45,
 		borderBottomColor: '#fff',
-		borderBottomWidth: 0.9
+		borderBottomWidth: 0.9,
+		color: '#fff'
 	},
 	textLink: {
 		color: '#fff',
@@ -95,6 +105,7 @@ const mapStateToProps = state => (
 	{
 		email: state.AutenticacaoReducer.email,	
 		senha: state.AutenticacaoReducer.senha,
+		loginErro: state.AutenticacaoReducer.loginErro
 	}
 );
 
@@ -105,4 +116,4 @@ const mapStateToProps = state => (
 
 //into first parentheses we have the actions that allows us to modificate our fields, this goin to pass as props to our class
 //remembering that if the name of key (at json parameters (modificaEmail for example)) is the same name of value, you just can omit it 
-export default connect(mapStateToProps, { modificaEmail, modificaSenha })(FormLogin);
+export default connect(mapStateToProps, { modificaEmail, modificaSenha, autenticarUsuario })(FormLogin);
