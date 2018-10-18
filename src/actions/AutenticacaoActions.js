@@ -4,11 +4,13 @@ import '@firebase/database';
 
 import b64 from 'base-64';
 
+import Types from 'types';
+
 export const modificaEmail = (text) => {
 	//his return is the action
 	//this action goin to be catch to action property on our reducer (AutenticacaoReducer.js)
 	return{
-		type: 'modifica_email',
+		type: Types.MODIFICA_EMAIL,
 		payload: text
 	};
 } 
