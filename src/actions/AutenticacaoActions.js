@@ -4,27 +4,37 @@ import '@firebase/database';
 
 import b64 from 'base-64';
 
-import Types from 'types';
+import {
+	MODIFICA_EMAIL, 
+	MODIFICA_SENHA, 
+	MODIFICA_NOME, 
+	CADASTRO_USUARIO_SUCESSO, 
+	CADASTRO_USUARIO_ERRO, 
+	LOGIN_USUARIO_SUCESSO, 
+	LOGIN_USUARIO_ERRO
+} from './types';
+
 
 export const modificaEmail = (text) => {
 	//his return is the action
 	//this action goin to be catch to action property on our reducer (AutenticacaoReducer.js)
+
 	return{
-		type: Types.MODIFICA_EMAIL,
+		type: MODIFICA_EMAIL,
 		payload: text
 	};
 } 
 
 export const modificaSenha = (text) => {
 	return{
-		type: 'modifica_senha',
+		type: MODIFICA_SENHA,
 		payload: text
 	};
 } 
 
 export const modificaNome = (text) => {
 	return{
-		type: 'modifica_nome',
+		type: MODIFICA_NOME,
 		payload: text
 	};
 }
@@ -53,13 +63,13 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 
 const cadastraUsuarioSucesso = (dispatch, navigation) => {
 
-	dispatch({ type: 'cadastro_usuario_sucesso' });
+	dispatch({ type: CADASTRO_USUARIO_SUCESSO });
 	
 	navigation.navigate('BoasVindas');
 }
 
 const cadastraUsuarioErro = (erro, dispatch) => {
-	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
+	dispatch({ type: CADASTRO_USUARIO_ERRO, payload: erro.message });
 }
 
 
@@ -75,14 +85,14 @@ export const autenticarUsuario = ({ email, senha, navigation }) => {
 }
 
 const loginUsuarioSucesso = (dispatch, navigation) => {
-	dispatch({ type: 'login_usuario_sucesso' });
+	dispatch({ type: LOGIN_USUARIO_SUCESSO });
 
 	navigation.navigate('Principal');
 }
 
 const loginUsuarioErro = (erro, dispatch) => {
 	dispatch({
-		type: 'login_usuario_erro',
+		type: LOGIN_USUARIO_ERRO,
 		payload: erro.message
 	})
 }
