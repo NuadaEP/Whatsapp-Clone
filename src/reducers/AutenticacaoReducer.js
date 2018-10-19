@@ -1,3 +1,14 @@
+import {
+	MODIFICA_EMAIL, 
+	MODIFICA_SENHA, 
+	MODIFICA_NOME, 
+	CADASTRO_USUARIO_SUCESSO, 
+	CADASTRO_USUARIO_ERRO, 
+	LOGIN_USUARIO_SUCESSO, 
+	LOGIN_USUARIO_ERRO,
+	LOGANDO
+} from '../actions/types';
+
 //this reducer is responsible to controll the states of inputs of the forms
 const INITIAL_STATE = {
 	nome: '',
@@ -5,7 +16,8 @@ const INITIAL_STATE = {
 	senha: '',
 	erroCadastro: '',
 	sucessoCadastro: '',
-	loginErro: ''
+	loginErro: '',
+	loading_login: false
 }
 
 //this reducer is exported and imported by index file, on this directory
@@ -24,24 +36,27 @@ export default (state = INITIAL_STATE, action) => {
 				Because we have two "name" indexes the last one overwrite the first one
 			*/ 
 
-		case "modifica_email":
+		case MODIFICA_EMAIL:
 			return { ...state, email: action.payload }
 
-		case "modifica_senha":
+		case MODIFICA_SENHA:
 			return { ...state, senha: action.payload }
 		
-		case "modifica_nome":
+		case MODIFICA_NOME:
 			return { ...state, nome: action.payload }
 		
-		case "cadastro_usuario_sucesso":
+		case CADASTRO_USUARIO_SUCESSO:
 			return { ...state, nome: '', senha: '' }
 
-		case "cadastro_usuario_erro":
-			return { ...state, erroCadastro: action.payload }
+		case CADASTRO_USUARIO_ERRO:
+			return { ...state, erroCadastro: action.payload, loading_login: false }
 
-		case "login_usuario_erro":
-			return{ ...state, loginErro: action.payload }
-		
+		case LOGIN_USUARIO_ERRO:
+			return { ...state, loginErro: action.payload, loading_login: false }
+
+		case LOGANDO:
+			return { ...state, loading_login: true }
+
 		default: 
 			return state;
 	}

@@ -11,7 +11,8 @@ import {
 	CADASTRO_USUARIO_SUCESSO, 
 	CADASTRO_USUARIO_ERRO, 
 	LOGIN_USUARIO_SUCESSO, 
-	LOGIN_USUARIO_ERRO
+	LOGIN_USUARIO_ERRO,
+	LOGANDO,
 } from './types';
 
 
@@ -76,6 +77,9 @@ const cadastraUsuarioErro = (erro, dispatch) => {
 export const autenticarUsuario = ({ email, senha, navigation }) => {
 
 	return dispatch => {
+
+		dispatch({ type: LOGANDO })
+
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, senha)
