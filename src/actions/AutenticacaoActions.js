@@ -12,7 +12,7 @@ import {
 	CADASTRO_USUARIO_ERRO, 
 	LOGIN_USUARIO_SUCESSO, 
 	LOGIN_USUARIO_ERRO,
-	LOGANDO,
+	AGUARDANDO,
 } from './types';
 
 
@@ -44,7 +44,10 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 	//dispatch goin to return the action of success or error of redux to store
 	//store is the only place of true of our aplication
 
-	return dispatch => (
+	return dispatch => {
+
+		dispatch({ type: AGUARDANDO })
+
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(email, senha)
@@ -59,7 +62,7 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 					.then(value => cadastraUsuarioSucesso(dispatch, navigation))
 			})
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
-	)
+	}
 }
 
 const cadastraUsuarioSucesso = (dispatch, navigation) => {
@@ -78,7 +81,7 @@ export const autenticarUsuario = ({ email, senha, navigation }) => {
 
 	return dispatch => {
 
-		dispatch({ type: LOGANDO })
+		dispatch({ type: AGUARDANDO })
 
 		firebase
 			.auth()

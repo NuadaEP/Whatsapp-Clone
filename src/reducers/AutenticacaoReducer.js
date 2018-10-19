@@ -6,7 +6,7 @@ import {
 	CADASTRO_USUARIO_ERRO, 
 	LOGIN_USUARIO_SUCESSO, 
 	LOGIN_USUARIO_ERRO,
-	LOGANDO
+	AGUARDANDO
 } from '../actions/types';
 
 //this reducer is responsible to controll the states of inputs of the forms
@@ -46,7 +46,7 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, nome: action.payload }
 		
 		case CADASTRO_USUARIO_SUCESSO:
-			return { ...state, nome: '', senha: '' }
+			return { ...state, nome: '', senha: '', loading_login: false }
 
 		case CADASTRO_USUARIO_ERRO:
 			return { ...state, erroCadastro: action.payload, loading_login: false }
@@ -54,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
 		case LOGIN_USUARIO_ERRO:
 			return { ...state, loginErro: action.payload, loading_login: false }
 
-		case LOGANDO:
+		case AGUARDANDO:
 			return { ...state, loading_login: true }
 
 		default: 

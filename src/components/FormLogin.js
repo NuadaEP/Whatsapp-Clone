@@ -16,7 +16,7 @@ class FormLogin extends Component{
 
 	renderBtnAcessar() {
 		if(this.props.loading_login) {
-			return( <ActivityIndicator size="large" /> )
+			return( <ActivityIndicator size="large" color="white" /> )
 		}
 		return(
 			<Button 
