@@ -30,6 +30,7 @@ class FormCadastro extends Component{
 							value={ this.props.nome } 
 							placeholder="Nome"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
@@ -40,6 +41,7 @@ class FormCadastro extends Component{
 							value={ this.props.email } 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.third.focus() }
@@ -52,6 +54,7 @@ class FormCadastro extends Component{
 							value={ this.props.senha } 
 							placeholder="Senha"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							ref={ input => this.third = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 

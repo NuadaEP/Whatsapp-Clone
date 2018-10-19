@@ -7,7 +7,7 @@ import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/Aute
 import { connect } from 'react-redux';
 
 class FormLogin extends Component{
-	
+
 	_autenticarUsuario() {
 		const { email, senha, navigation } = this.props;
 		
@@ -28,6 +28,7 @@ class FormLogin extends Component{
 	}
 
 	render() {
+
 		return(	
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
 				<View style={ styles.mainView }>
@@ -40,6 +41,7 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
@@ -51,6 +53,7 @@ class FormLogin extends Component{
 							value={this.props.senha} 
 							placeholder="Senha" 
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							ref={ input => this.second = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 
