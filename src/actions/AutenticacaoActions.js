@@ -4,25 +4,38 @@ import '@firebase/database';
 
 import b64 from 'base-64';
 
+import {
+	MODIFICA_EMAIL, 
+	MODIFICA_SENHA, 
+	MODIFICA_NOME, 
+	CADASTRO_USUARIO_SUCESSO, 
+	CADASTRO_USUARIO_ERRO, 
+	LOGIN_USUARIO_SUCESSO, 
+	LOGIN_USUARIO_ERRO,
+	AGUARDANDO,
+} from './types';
+
+
 export const modificaEmail = (text) => {
 	//his return is the action
 	//this action goin to be catch to action property on our reducer (AutenticacaoReducer.js)
+
 	return{
-		type: 'modifica_email',
+		type: MODIFICA_EMAIL,
 		payload: text
 	};
 } 
 
 export const modificaSenha = (text) => {
 	return{
-		type: 'modifica_senha',
+		type: MODIFICA_SENHA,
 		payload: text
 	};
 } 
 
 export const modificaNome = (text) => {
 	return{
-		type: 'modifica_nome',
+		type: MODIFICA_NOME,
 		payload: text
 	};
 }
@@ -31,7 +44,10 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 	//dispatch goin to return the action of success or error of redux to store
 	//store is the only place of true of our aplication
 
-	return dispatch => (
+	return dispatch => {
+
+		dispatch({ type: AGUARDANDO })
+
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(email, senha)
@@ -46,24 +62,27 @@ export const cadastraUsuario = ({ nome, email, senha, navigation }) => {
 					.then(value => cadastraUsuarioSucesso(dispatch, navigation))
 			})
 			.catch(erro => cadastraUsuarioErro(erro, dispatch))
-	)
+	}
 }
 
 const cadastraUsuarioSucesso = (dispatch, navigation) => {
 
-	dispatch({ type: 'cadastro_usuario_sucesso' });
+	dispatch({ type: CADASTRO_USUARIO_SUCESSO });
 	
 	navigation.navigate('BoasVindas');
 }
 
 const cadastraUsuarioErro = (erro, dispatch) => {
-	dispatch({ type: 'cadastro_usuario_erro', payload: erro.message });
+	dispatch({ type: CADASTRO_USUARIO_ERRO, payload: erro.message });
 }
 
 
 export const autenticarUsuario = ({ email, senha, navigation }) => {
 
 	return dispatch => {
+
+		dispatch({ type: AGUARDANDO })
+
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, senha)
@@ -73,14 +92,14 @@ export const autenticarUsuario = ({ email, senha, navigation }) => {
 }
 
 const loginUsuarioSucesso = (dispatch, navigation) => {
-	dispatch({ type: 'login_usuario_sucesso' });
+	dispatch({ type: LOGIN_USUARIO_SUCESSO });
 
 	navigation.navigate('Principal');
 }
 
 const loginUsuarioErro = (erro, dispatch) => {
 	dispatch({
-		type: 'login_usuario_erro',
+		type: LOGIN_USUARIO_ERRO,
 		payload: erro.message
 	})
 }

@@ -33,7 +33,7 @@ const RootStack = createStackNavigator(
 		Principal: {
 			screen: Principal,
 			navigationOptions: () => ({
-				headerTransparent: true
+				header: null
 			})
 		}
 	},

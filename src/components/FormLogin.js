@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground, ActivityIndicator } from 'react-native';
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoActions';
 
 //this component is used at the end of the file
@@ -12,6 +12,19 @@ class FormLogin extends Component{
 		const { email, senha, navigation } = this.props;
 		
 		this.props.autenticarUsuario({ email, senha, navigation });
+	}
+
+	renderBtnAcessar() {
+		if(this.props.loading_login) {
+			return( <ActivityIndicator size="large" color="white" /> )
+		}
+		return(
+			<Button 
+				title = "Acessar"
+				onPress = { () => this._autenticarUsuario() }
+				color = "#115e54"
+			/>
+		)
 	}
 
 	render() {
@@ -27,8 +40,8 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
-							returnKeyType={ "next" }
 							style={ styles.formInput } 
+							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
 							onChangeText={ text => this.props.modificaEmail(text) } 
 						/>
@@ -52,11 +65,7 @@ class FormLogin extends Component{
 					</View>
 
 					<View style={ styles.buttonView }>
-						<Button 
-							title = "Acessar"
-							onPress = { () => this._autenticarUsuario() }
-							color = "#115e54"
-						/>
+						{ this.renderBtnAcessar() }
 					</View>
 				</View>
 			</ImageBackground>	
@@ -105,7 +114,8 @@ const mapStateToProps = state => (
 	{
 		email: state.AutenticacaoReducer.email,	
 		senha: state.AutenticacaoReducer.senha,
-		loginErro: state.AutenticacaoReducer.loginErro
+		loginErro: state.AutenticacaoReducer.loginErro,
+		loading_login: state.AutenticacaoReducer.loading_login
 	}
 );
 
