@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Button, ImageBackground, Text, ActivityIndicator } from 'react-native';
+import { 
+	View,
+	StyleSheet,
+	TextInput,
+	Button,
+	ImageBackground,
+	Text,
+	ActivityIndicator,
+	StatusBar 
+} from 'react-native';
 
 import { modificaEmail, modificaSenha, modificaNome, cadastraUsuario } from '../actions/AutenticacaoActions';
 
@@ -24,12 +33,16 @@ class FormCadastro extends Component{
 	render() {
 		return(
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
+
+				<StatusBar backgroundColor="#114d44" /> 
+
 				<View style={ styles.mainView }>
 					<View style={ styles.formView }>
 						<TextInput 
 							value={ this.props.nome } 
 							placeholder="Nome"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
@@ -40,6 +53,7 @@ class FormCadastro extends Component{
 							value={ this.props.email } 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.third.focus() }
@@ -52,6 +66,7 @@ class FormCadastro extends Component{
 							value={ this.props.senha } 
 							placeholder="Senha"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							ref={ input => this.third = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 

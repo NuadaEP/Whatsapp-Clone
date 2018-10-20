@@ -29,11 +29,13 @@ const RootStack = createStackNavigator(
 				header: null
 			})
 		},
-
+		
 		Principal: {
 			screen: Principal,
 			navigationOptions: () => ({
-				header: null
+				headerTitle: 'WhatsApp Clone',
+				headerStyle: {backgroundColor: '#115e54', elevation: 0},
+				headerTintColor: 'white',
 			})
 		}
 	},

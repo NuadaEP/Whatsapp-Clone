@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground, ActivityIndicator } from 'react-native';
+import { 
+	View, 
+	Text, 
+	TextInput, 
+	Button, 
+	StyleSheet, 
+	TouchableHighlight, 
+	ImageBackground, 
+	ActivityIndicator,
+	StatusBar
+ } from 'react-native';
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoActions';
 
 //this component is used at the end of the file
@@ -7,7 +17,7 @@ import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/Aute
 import { connect } from 'react-redux';
 
 class FormLogin extends Component{
-	
+
 	_autenticarUsuario() {
 		const { email, senha, navigation } = this.props;
 		
@@ -28,8 +38,12 @@ class FormLogin extends Component{
 	}
 
 	render() {
+
 		return(	
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
+				
+				<StatusBar backgroundColor="#114d44" /> 
+
 				<View style={ styles.mainView }>
 					<View style={ styles.headerView }>
 						<Text style={ styles.headerText }>WhatsApp Clone</Text>
@@ -40,6 +54,7 @@ class FormLogin extends Component{
 							value={this.props.email} 
 							placeholder="E-mail"
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							returnKeyType={ "next" }
 							onSubmitEditing={ () => this.second.focus() }
@@ -51,6 +66,7 @@ class FormLogin extends Component{
 							value={this.props.senha} 
 							placeholder="Senha" 
 							placeholderTextColor="#fff"
+							selectionColor="#fff"
 							style={ styles.formInput } 
 							ref={ input => this.second = input }
 							onChangeText={ text => this.props.modificaSenha(text) } 
