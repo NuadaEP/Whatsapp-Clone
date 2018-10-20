@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight, ImageBackground, ActivityIndicator } from 'react-native';
+import { 
+	View, 
+	Text, 
+	TextInput, 
+	Button, 
+	StyleSheet, 
+	TouchableHighlight, 
+	ImageBackground, 
+	ActivityIndicator,
+	StatusBar
+ } from 'react-native';
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoActions';
 
 //this component is used at the end of the file
@@ -31,6 +41,9 @@ class FormLogin extends Component{
 
 		return(	
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
+				
+				<StatusBar backgroundColor="#114d44" /> 
+
 				<View style={ styles.mainView }>
 					<View style={ styles.headerView }>
 						<Text style={ styles.headerText }>WhatsApp Clone</Text>

@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Button, ImageBackground, Text, ActivityIndicator } from 'react-native';
+import { 
+	View,
+	StyleSheet,
+	TextInput,
+	Button,
+	ImageBackground,
+	Text,
+	ActivityIndicator,
+	StatusBar 
+} from 'react-native';
 
 import { modificaEmail, modificaSenha, modificaNome, cadastraUsuario } from '../actions/AutenticacaoActions';
 
@@ -24,6 +33,9 @@ class FormCadastro extends Component{
 	render() {
 		return(
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
+
+				<StatusBar backgroundColor="#114d44" /> 
+
 				<View style={ styles.mainView }>
 					<View style={ styles.formView }>
 						<TextInput 
