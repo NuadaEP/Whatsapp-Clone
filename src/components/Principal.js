@@ -43,7 +43,10 @@ export default class Principal extends React.Component {
           second: _Contatos,
         })}
         onIndexChange={index => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
+        initialLayout={{ 
+          height: 0,
+          width: Dimensions.get('window').width
+        }}
         renderTabBar={ this.renderTabBar }
       />
     );
