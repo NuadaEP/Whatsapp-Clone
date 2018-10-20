@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
 
@@ -13,7 +13,18 @@ const _Contatos = () => (
   <Contatos />
 );
 
+
 export default class Principal extends React.Component {
+  
+  renderTabBar = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={{ backgroundColor: 'white' }}
+      style={{ backgroundColor: '#115e54' }}
+      tabStyle={{ elevation: 1 }}
+    />
+  )
+
   state = {
     index: 0,
     routes: [
@@ -22,7 +33,6 @@ export default class Principal extends React.Component {
     ],
   };
 
-  _renderHeader = props => <TabBarMenu { ...props } />;
 
   render() {
     return (
@@ -34,6 +44,7 @@ export default class Principal extends React.Component {
         })}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Dimensions.get('window').width }}
+        renderTabBar={ this.renderTabBar }
       />
     );
   }

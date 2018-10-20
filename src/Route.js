@@ -34,7 +34,7 @@ const RootStack = createStackNavigator(
 			screen: Principal,
 			navigationOptions: () => ({
 				headerTitle: 'WhatsApp Clone',
-				headerStyle: {backgroundColor: '#115e54'},
+				headerStyle: {backgroundColor: '#115e54', elevation: 0},
 				headerTintColor: 'white',
 			})
 		}
