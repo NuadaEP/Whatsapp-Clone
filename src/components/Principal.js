@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
@@ -13,12 +13,19 @@ const _Contatos = () => (
 
 
 export default class Principal extends React.Component {
+
+  _AdicionarContato() {
+    console.log(this.props.navigation.navigate('AdicionarContato'))
+  }
+
   static navigationOptions = {
     headerRight: (
-      <Image 
-        source={require('../images/adicionar-contato.png')} 
-        style={{ marginRight: 10 }} 
-      />
+      <TouchableOpacity onPress={ () => this._AdicionarContato() }>
+        <Image 
+          source={require('../images/adicionar-contato.png')} 
+          style={{ marginRight: 10 }} 
+        />
+      </TouchableOpacity>
       ),
   }
   
