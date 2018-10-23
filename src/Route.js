@@ -50,7 +50,7 @@ const RootStack = createStackNavigator(
 		},
 	},
 	{
-		initialRouteName: 'Principal'
+		initialRouteName: 'AdicionarContato'
 	}
 );
 
