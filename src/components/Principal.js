@@ -1,20 +1,31 @@
-import * as React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet, Dimensions, Image, TouchableHighlight } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
 
 const _Conversas = () => (
-  // <View style={[styles.container, { backgroundColor: '#ff4081' }]} />
   <Conversas />
 );
 const _Contatos = () => (
-  // <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
   <Contatos />
 );
 
 
-export default class Principal extends React.Component {
+export default class Principal extends Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: ( 
+        <TouchableHighlight onPress={ () => navigation.navigate('AdicionarContato') } underlayColor="#114d44">
+          <Image 
+              source={require('../images/adicionar-contato.png')} 
+              style={{ marginRight: 10 }} 
+          />
+        </TouchableHighlight>
+      ),
+    }
+  }
   
   renderTabBar = props => (
     <TabBar

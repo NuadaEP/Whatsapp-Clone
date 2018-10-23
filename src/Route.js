@@ -4,6 +4,7 @@ import FormLogin from './components/FormLogin';
 import FormCadastro from './components/FormCadastro';
 import BoasVindas from './components/BoasVindas';
 import Principal from './components/Principal';
+import AdicionarContato from './components/AdicionarContato';
 
 const RootStack = createStackNavigator(
 	{
@@ -37,10 +38,19 @@ const RootStack = createStackNavigator(
 				headerStyle: {backgroundColor: '#115e54', elevation: 0},
 				headerTintColor: 'white',
 			})
-		}
+		},
+
+		AdicionarContato: {
+			screen: AdicionarContato,
+			navigationOptions: () => ({
+				headerTitle: 'Adicionar Cotato',
+				headerStyle: {backgroundColor: '#115e54'},
+				headerTintColor: 'white',
+			})
+		},
 	},
 	{
-		initialRouteName: 'Login'
+		initialRouteName: 'Principal'
 	}
 );
 
