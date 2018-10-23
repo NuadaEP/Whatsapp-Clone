@@ -41,8 +41,13 @@ const RootStack = createStackNavigator(
 		},
 
 		AdicionarContato: {
-			screen: AdicionarContato
-		}
+			screen: AdicionarContato,
+			navigationOptions: () => ({
+				headerTitle: 'Adicionar Cotato',
+				headerStyle: {backgroundColor: '#115e54'},
+				headerTintColor: 'white',
+			})
+		},
 	},
 	{
 		initialRouteName: 'Principal'

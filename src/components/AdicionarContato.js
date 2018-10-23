@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
 
-export default class Contatos extends Component {
+export default class AdicionarContato extends Component {
   render() {
     return (
       <View>

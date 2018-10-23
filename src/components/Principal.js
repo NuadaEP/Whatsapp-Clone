@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { View, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet, Dimensions, Image, TouchableHighlight } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
@@ -12,21 +12,19 @@ const _Contatos = () => (
 );
 
 
-export default class Principal extends React.Component {
+export default class Principal extends Component {
 
-  _AdicionarContato() {
-    console.log(this.props.navigation.navigate('AdicionarContato'))
-  }
-
-  static navigationOptions = {
-    headerRight: (
-      <TouchableOpacity onPress={ () => this._AdicionarContato() }>
-        <Image 
-          source={require('../images/adicionar-contato.png')} 
-          style={{ marginRight: 10 }} 
-        />
-      </TouchableOpacity>
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: ( 
+        <TouchableHighlight onPress={ () => navigation.navigate('AdicionarContato') } underlayColor="#114d44">
+          <Image 
+              source={require('../images/adicionar-contato.png')} 
+              style={{ marginRight: 10 }} 
+          />
+        </TouchableHighlight>
       ),
+    }
   }
   
   renderTabBar = props => (
