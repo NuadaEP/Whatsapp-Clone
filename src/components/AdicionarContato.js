@@ -29,6 +29,9 @@ class AdicionarContato extends Component {
             color='#115e54'
             onPress={ () => this.props.addContato(this.props.email) }
           />
+
+          <Text style={{ color: 'green' }}>{ this.props.add_contato_sucesso }</Text>
+          <Text style={{ color: 'red' }}>{ this.props.add_contato_erro }</Text>
         </View>
 
       </ImageBackground>
@@ -37,7 +40,9 @@ class AdicionarContato extends Component {
 }
 
 const MapStateToProps = state => ({
-  email: state.AppReducer.email
+  email: state.AppReducer.email,
+  add_contato_sucesso: state.AppReducer.add_contato_sucesso,
+  add_contato_erro: state.AppReducer.add_contato_erro,
 })
 
 export default connect(MapStateToProps, { modificaEmail, addContato })(AdicionarContato);
