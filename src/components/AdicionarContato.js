@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar, TextInput, Button, ImageBackground } from 'react-native';
 
-import { modificaEmail } from '../actions/AppActions';
+import { modificaEmail, addContato } from '../actions/AppActions';
 
 import { connect } from 'react-redux';
 
 class AdicionarContato extends Component {
+
   render() {
     return (
       <ImageBackground style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-around', padding: 20, width: null }} source={ require('../images/bg-in.png') }>
@@ -26,7 +27,7 @@ class AdicionarContato extends Component {
           <Button 
             title='Adicionar'
             color='#115e54'
-            onPress={ () => false }
+            onPress={ () => this.props.addContato(this.props.email) }
           />
         </View>
 
@@ -39,4 +40,4 @@ const MapStateToProps = state => ({
   email: state.AppReducer.email
 })
 
-export default connect(MapStateToProps, { modificaEmail })(AdicionarContato);
+export default connect(MapStateToProps, { modificaEmail, addContato })(AdicionarContato);
