@@ -32,10 +32,22 @@ export const addContato = email => {
         .once('value')
         .then(snapshot => { 
             if(snapshot.val()){
-                dispatch({
-                    type: ADD_CONTATO_SUCESSO,
-                    payload: 'Contato adicionado com sucesso'
-                })
+                //path: contatos_usuario/email_do_usuario/email_do_contato/nome_do_contato
+                
+                const { currentUser } = firebase.auth();
+
+                let emailCurrentUserB64 = b64.encode(currentUser.email);
+
+                firebase
+                    .database()
+                    .ref(`/contatos_usuario/${ emailCurrentUserB64 }`)
+                    .push({ email: email, nome: 'NOME DO CONTATO' })
+                    .then(
+                        dispatch({
+                            type: ADD_CONTATO_SUCESSO,
+                            payload: 'Contato adicionado com sucesso'
+                        })
+                    )
             } else {
                 dispatch({
                     type: ADD_CONTATO_ERRO,
