@@ -12,8 +12,8 @@ import {
 //this reducer is responsible to controll the states of inputs of the forms
 const INITIAL_STATE = {
 	nome: '',
-	email: '',
-	senha: '',
+	email: 'T@t.com',
+	senha: '123456',
 	erroCadastro: '',
 	sucessoCadastro: '',
 	loginErro: '',

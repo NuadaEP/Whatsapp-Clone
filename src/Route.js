@@ -37,6 +37,7 @@ const RootStack = createStackNavigator(
 				headerTitle: 'WhatsApp Clone',
 				headerStyle: {backgroundColor: '#115e54', elevation: 0},
 				headerTintColor: 'white',
+				// headerLeft: null
 			})
 		},
 
@@ -50,7 +51,7 @@ const RootStack = createStackNavigator(
 		},
 	},
 	{
-		initialRouteName: 'Principal'
+		initialRouteName: 'Login'
 	}
 );
 

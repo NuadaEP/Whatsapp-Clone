@@ -6,3 +6,7 @@ export const CADASTRO_USUARIO_ERRO = 'cadastro_usuario_erro';
 export const LOGIN_USUARIO_SUCESSO = 'login_usuario_sucesso';
 export const LOGIN_USUARIO_ERRO = 'login_usuario_erro';
 export const AGUARDANDO = 'aguardando';
+export const ADD_CONTATO = 'add_contato';
+export const ADD_CONTATO_SUCESSO = 'add_contato_sucesso';
+export const ADD_CONTATO_ERRO = 'add_contato_erro';
+export const LOADING = 'loading';
