@@ -1,8 +1,9 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
 import '@firebase/database';
+import _ from 'lodash';
 
-import { MODIFICA_EMAIL, ADD_CONTATO, ADD_CONTATO_SUCESSO, ADD_CONTATO_ERRO } from './types';
+import { MODIFICA_EMAIL, ADD_CONTATO_SUCESSO, ADD_CONTATO_ERRO, LOADING } from './types';
 
 import b64 from 'base-64';
 
@@ -26,12 +27,17 @@ export const addContato = email => {
 
     return dispatch => {
 
+        dispatch({ type: LOADING })
+
         firebase
         .database()
         .ref(`/contatos/${encodeEmail}`)
         .once('value')
         .then(snapshot => { 
             if(snapshot.val()){
+
+                const dadosUsuario = _.first(_.values(snapshot.val()))
+
                 //path: contatos_usuario/email_do_usuario/email_do_contato/nome_do_contato
                 
                 const { currentUser } = firebase.auth();
@@ -41,20 +47,37 @@ export const addContato = email => {
                 firebase
                     .database()
                     .ref(`/contatos_usuario/${ emailCurrentUserB64 }`)
-                    .push({ email: email, nome: 'NOME DO CONTATO' })
-                    .then(
-                        dispatch({
-                            type: ADD_CONTATO_SUCESSO,
-                            payload: 'Contato adicionado com sucesso'
-                        })
-                    )
+                    .push({ email: email, nome: dadosUsuario.nome })
+                    .then(() => adicionaContatoSucesso(dispatch))
+                    .catch(error => adicionaContatoErro(error, dispatch))
             } else {
                 dispatch({
                     type: ADD_CONTATO_ERRO,
-                    payload: 'O usuário não existe'
+                    payload: 'O email não corresponde a um previamente cadastrado'
                 })
             }
         })
         
+    }
+}
+
+const adicionaContatoSucesso = (dispatch) => {
+    dispatch({
+        type: ADD_CONTATO_SUCESSO,
+        payload: true
+    })
+}
+
+const adicionaContatoErro = (error, dispatch) => {
+    dispatch({
+        type: ADD_CONTATO_ERRO,
+        payload: error
+    })
+}
+
+export const habilitaInclusaoContato = () => {
+    return{
+        type: ADD_CONTATO_SUCESSO,
+        payload: false
     }
 }

@@ -9,3 +9,4 @@ export const AGUARDANDO = 'aguardando';
 export const ADD_CONTATO = 'add_contato';
 export const ADD_CONTATO_SUCESSO = 'add_contato_sucesso';
 export const ADD_CONTATO_ERRO = 'add_contato_erro';
+export const LOADING = 'loading';

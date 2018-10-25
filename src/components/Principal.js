@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+
 import { View, StyleSheet, Dimensions, Image, TouchableHighlight } from 'react-native';
+
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+
+import { connect } from 'react-redux';
+
+import { habilitaInclusaoContato } from '../actions/AppActions';
+
 import Conversas from './Conversas';
 import Contatos from './Contatos';
 
@@ -12,12 +19,19 @@ const _Contatos = () => (
 );
 
 
-export default class Principal extends Component {
+class Principal extends Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: ( 
-        <TouchableHighlight onPress={ () => navigation.navigate('AdicionarContato') } underlayColor="#114d44">
+        <TouchableHighlight 
+          onPress={ 
+            () => {
+              navigation.navigate('AdicionarContato');
+            } 
+          } 
+          underlayColor="#114d44"
+        >
           <Image 
               source={require('../images/adicionar-contato.png')} 
               style={{ marginRight: 10 }} 
@@ -67,3 +81,5 @@ export default class Principal extends Component {
 const styles = StyleSheet.create({
   container: { flex: 1 }
 });
+
+export default connect(null, { habilitaInclusaoContato })(Principal);
