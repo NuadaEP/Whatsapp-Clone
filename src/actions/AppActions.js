@@ -3,7 +3,13 @@ import '@firebase/auth';
 import '@firebase/database';
 import _ from 'lodash';
 
-import { MODIFICA_EMAIL, ADD_CONTATO_SUCESSO, ADD_CONTATO_ERRO, LOADING } from './types';
+import { 
+    MODIFICA_EMAIL, 
+    ADD_CONTATO_SUCESSO, 
+    ADD_CONTATO_ERRO, 
+    LOADING,
+    LISTA_CONTATO_USUARIO
+} from './types';
 
 import b64 from 'base-64';
 
@@ -80,4 +86,21 @@ export const habilitaInclusaoContato = () => {
         type: ADD_CONTATO_SUCESSO,
         payload: false
     }
+}
+
+export const contatosUsuarioFetch = () => {
+
+    const { currentUser } = firebase.auth();
+
+    return dispatch => {
+        let emailUsuarioB64 = b64.encode( currentUser.email );
+
+        firebase
+            .database()
+            .ref(`/contatos_usuario/${emailUsuarioB64}`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_CONTATO_USUARIO, payload: snapshot.val() })
+            })
+    }
+    
 }
