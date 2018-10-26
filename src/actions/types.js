@@ -10,3 +10,4 @@ export const ADD_CONTATO = 'add_contato';
 export const ADD_CONTATO_SUCESSO = 'add_contato_sucesso';
 export const ADD_CONTATO_ERRO = 'add_contato_erro';
 export const LOADING = 'loading';
+export const LISTA_CONTATO_USUARIO = 'lista_contato_usuario';

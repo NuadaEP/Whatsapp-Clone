@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
 
-export default class Contatos extends Component {
+import { connect } from 'react-redux';
+
+import { contatosUsuarioFetch } from '../actions/AppActions';
+
+class Contatos extends Component {
+
+  componentWillMount(){
+    this.props.contatosUsuarioFetch();
+  }
+
   render() {
     return (
       <View>
@@ -11,3 +20,6 @@ export default class Contatos extends Component {
     )
   }
 }
+
+
+export default connect(null, { contatosUsuarioFetch })(Contatos);
