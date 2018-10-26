@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, ListView } from 'react-native';
+import { View, Text, StatusBar, ListView, ImageBackground, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -31,21 +31,24 @@ class Contatos extends Component {
 
   render() {
     return (
-      <View>
-            <StatusBar backgroundColor="#114d44" /> 
-            <ListView  
-              enableEmptySections
-              dataSource={ this.fonteDeDados }
-              renderRow={ data => {
-                  return (
-                    <View>
-                      <Text>{ data.nome }</Text>
-                    </View>
-                  )
-                } 
-              }
-            />
-      </View>
+      <ImageBackground style={{ flex: 1, width: null }} source={ require('../images/bg-in.png') }>
+        <ScrollView>
+              <StatusBar backgroundColor="#114d44" /> 
+              <ListView  
+                enableEmptySections
+                dataSource={ this.fonteDeDados }
+                renderRow={ data => {
+                    return (
+                      <View style={{ flex: 1, padding: 20, borderBottomColor: '#ccc', borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 25 }}>{ data.nome }</Text>
+                        <Text style={{ fontSize: 18 }}>{ data.email }</Text>
+                      </View>
+                    )
+                  } 
+                }
+              />
+        </ScrollView>
+      </ImageBackground>
     )
   }
 }
