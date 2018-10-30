@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, ListView, ImageBackground, ScrollView } from 'react-native';
+import { View, StatusBar, ListView, ImageBackground, ScrollView } from 'react-native';
+
+import ListViewData from './SubComponents/ListViewData';
 
 import { connect } from 'react-redux';
 
@@ -14,6 +16,7 @@ class Contatos extends Component {
     this.props.contatosUsuarioFetch();
 
     this.criaFonteDeDados( this.props.contatos );
+
   }
 
   //this native function is just executed when have a diferent value to the props, so the first load of this component dont will execute
@@ -28,20 +31,19 @@ class Contatos extends Component {
     this.fonteDeDados = ds.cloneWithRows( contatos );
     
   }
-
+  
   render() {
-    return (
+    return (  
       <ImageBackground style={{ flex: 1, width: null }} source={ require('../images/bg-in.png') }>
         <ScrollView>
               <StatusBar backgroundColor="#114d44" /> 
               <ListView  
                 enableEmptySections
                 dataSource={ this.fonteDeDados }
-                renderRow={ data => {
+                renderRow={ ( data ) => {
                     return (
-                      <View style={{ flex: 1, padding: 20, borderBottomColor: '#ccc', borderBottomWidth: 1 }}>
-                        <Text style={{ fontSize: 25 }}>{ data.nome }</Text>
-                        <Text style={{ fontSize: 18 }}>{ data.email }</Text>
+                      <View>
+                        <ListViewData name={data.nome} email={data.email} navigation={this.props.navigation} />
                       </View>
                     )
                   } 
