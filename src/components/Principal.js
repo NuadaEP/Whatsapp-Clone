@@ -11,14 +11,6 @@ import { habilitaInclusaoContato } from '../actions/AppActions';
 import Conversas from './Conversas';
 import Contatos from './Contatos';
 
-const _Conversas = () => (
-  <Conversas />
-);
-const _Contatos = () => (
-  <Contatos />
-);
-
-
 class Principal extends Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -41,6 +33,13 @@ class Principal extends Component {
     }
   }
   
+  _Conversas = () => (
+    <Conversas />
+  );
+  _Contatos = () => (
+    <Contatos navigation={this.props.navigation}/>
+  );
+
   renderTabBar = props => (
     <TabBar
       {...props}
@@ -64,8 +63,8 @@ class Principal extends Component {
       <TabView
         navigationState={this.state}
         renderScene={SceneMap({
-          first: _Conversas,
-          second: _Contatos,
+          first: this._Conversas,
+          second: this._Contatos,
         })}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ 

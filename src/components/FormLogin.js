@@ -38,10 +38,8 @@ class FormLogin extends Component{
 	}
 
 	render() {
-
 		return(	
 			<ImageBackground style={ styles.imageBackground } source={ require('../images/bg.png') } >
-				
 				<StatusBar backgroundColor="#114d44" /> 
 
 				<View style={ styles.mainView }>

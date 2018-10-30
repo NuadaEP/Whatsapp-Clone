@@ -5,6 +5,8 @@ import FormCadastro from './components/FormCadastro';
 import BoasVindas from './components/BoasVindas';
 import Principal from './components/Principal';
 import AdicionarContato from './components/AdicionarContato';
+import Contatos from './components/Contatos';
+import Conversa from './components/Conversa';
 
 const RootStack = createStackNavigator(
 	{
@@ -45,6 +47,15 @@ const RootStack = createStackNavigator(
 			screen: AdicionarContato,
 			navigationOptions: () => ({
 				headerTitle: 'Adicionar Cotato',
+				headerStyle: {backgroundColor: '#115e54'},
+				headerTintColor: 'white',
+			})
+		},
+
+		Conversa: {
+			screen: Conversa,
+			navigationOptions: () => ({
+				headerTitle: 'Conversa',
 				headerStyle: {backgroundColor: '#115e54'},
 				headerTintColor: 'white',
 			})
