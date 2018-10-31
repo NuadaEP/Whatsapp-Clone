@@ -9,7 +9,8 @@ import {
     ADD_CONTATO_ERRO, 
     LOADING,
     LISTA_CONTATO_USUARIO,
-    DIGITA_MENSAGEM
+    DIGITA_MENSAGEM,
+    ENVIA_MENSAGEM,
 } from './types';
 
 import b64 from 'base-64';
@@ -110,5 +111,12 @@ export const digitaMensagem = text => {
     return {
         type: DIGITA_MENSAGEM,
         payload: text 
+    }
+}
+
+export const enviaMensagem = (text, nomme, email) => {
+    return {
+        type: ENVIA_MENSAGEM,
+        payload: text
     }
 }

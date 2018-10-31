@@ -12,3 +12,4 @@ export const ADD_CONTATO_ERRO = 'add_contato_erro';
 export const LOADING = 'loading';
 export const LISTA_CONTATO_USUARIO = 'lista_contato_usuario';
 export const DIGITA_MENSAGEM = 'digita_mensagem';
+export const ENVIA_MENSAGEM = 'envia_mensagem';

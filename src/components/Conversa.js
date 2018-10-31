@@ -3,9 +3,15 @@ import { View, Text, ImageBackground, TextInput, Image, TouchableHighlight } fro
 
 import { connect } from 'react-redux';
 
-import { digitaMensagem } from '../actions/AppActions';
+import { digitaMensagem, enviaMensagem } from '../actions/AppActions';
 
 class Conversa extends Component {
+
+  _enviaMensagem(){
+    const { mensagem, nome, email } = this.props;
+
+    this.props.enviaMensagem(this.props.mensagem);
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -27,11 +33,11 @@ class Conversa extends Component {
               value={ this.props.mensagem }
               onChangeText={ text => this.props.digitaMensagem(text) }
               returnKeyType={ 'done' }
-              onSubmitEditing={ () => alert(this.props.mensagem) }
+              onSubmitEditing={ () => { this._enviaMensagem() } }
             />
 
             <TouchableHighlight 
-              onPress={ () => alert(this.props.mensagem) } 
+              onPress={ () => { this._enviaMensagem() } } 
               style={{ backgroundColor: '#13665a', width: 50, height: 50, alignItems: 'center', justifyContent: "center", borderRadius: 100, marginLeft: 5 }}
             >
               <Image 
@@ -47,9 +53,9 @@ class Conversa extends Component {
 
 const mapStateToProps = state => (
   {
-    mensagem: state.AppReducer.mensagem
+    mensagem: state.AppReducer.mensagem,
   }
 )
 
 
-export default connect(mapStateToProps, { digitaMensagem })(Conversa);
+export default connect(mapStateToProps, { digitaMensagem, enviaMensagem })(Conversa);
