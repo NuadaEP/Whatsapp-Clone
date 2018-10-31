@@ -55,14 +55,13 @@ const RootStack = createStackNavigator(
 		Conversa: {
 			screen: Conversa,
 			navigationOptions: () => ({
-				headerTitle: 'Conversa',
 				headerStyle: {backgroundColor: '#115e54'},
 				headerTintColor: 'white',
 			})
 		},
 	},
 	{
-		initialRouteName: 'Conversa'
+		initialRouteName: 'Login'
 	}
 );
 

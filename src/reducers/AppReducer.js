@@ -2,7 +2,8 @@ const INITIAL_STATE = {
     email: 'T@t.com',
     add_contato_sucesso: false,
     add_contato_erro: '',
-    loading: false
+    loading: false,
+    mensagem: ''
 
 };
 
@@ -20,6 +21,8 @@ export default ( state = INITIAL_STATE, action ) => {
         case 'loading':
             return { ...state, loading: true }
 
+        case 'digita_mensagem':
+            return { ...state, mensagem: action.payload }
 
         default:
             return state;

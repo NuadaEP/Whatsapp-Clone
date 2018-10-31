@@ -8,7 +8,8 @@ import {
     ADD_CONTATO_SUCESSO, 
     ADD_CONTATO_ERRO, 
     LOADING,
-    LISTA_CONTATO_USUARIO
+    LISTA_CONTATO_USUARIO,
+    DIGITA_MENSAGEM
 } from './types';
 
 import b64 from 'base-64';
@@ -103,4 +104,11 @@ export const contatosUsuarioFetch = () => {
             })
     }
     
+}
+
+export const digitaMensagem = text => {
+    return {
+        type: DIGITA_MENSAGEM,
+        payload: text 
+    }
 }
