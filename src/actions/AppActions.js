@@ -14,6 +14,7 @@ import {
 } from './types';
 
 import b64 from 'base-64';
+import { base64 } from '@firebase/util';
 
 export const modificaEmail = text => {
    return{
@@ -115,12 +116,30 @@ export const digitaMensagem = text => {
 }
 
 export const enviaMensagem = (mensagem, nome, email) => {
-    console.log(mensagem)
-    console.log(nome)
-    console.log(email)
 
-    return {
-        type: ENVIA_MENSAGEM,
-        payload: mensagem
+    //current user datas
+    const { currentUser } = firebase.auth();
+
+    //contact datas
+    const userEmail = currentUser.email;
+
+    return dispatch => {
+
+        //convert both emails to base 64
+        const userEmailB64 = b64.encode(userEmail);
+
+        const contactEmailB64 = b64.encode(email);
+
+        firebase
+            .database()
+            .ref(`/mensagens/${userEmailB64}/${contactEmailB64}`) //this is like "where"
+            .push({ mensagem: mensagem, tipo: 'e' })
+            .then( () => {
+                firebase
+                    .database()
+                    .ref(`/mensagens/${contactEmailB64}/${userEmailB64}`)
+                    .push({ mensagem: mensagem, tipo: 'r' })
+                    .then( () => dispatch ({ type: ENVIA_MENSAGEM }) )
+            } )
     }
 }
