@@ -114,9 +114,13 @@ export const digitaMensagem = text => {
     }
 }
 
-export const enviaMensagem = (text, nomme, email) => {
+export const enviaMensagem = (mensagem, nome, email) => {
+    console.log(mensagem)
+    console.log(nome)
+    console.log(email)
+
     return {
         type: ENVIA_MENSAGEM,
-        payload: text
+        payload: mensagem
     }
 }

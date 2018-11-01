@@ -7,12 +7,16 @@ import { digitaMensagem, enviaMensagem } from '../actions/AppActions';
 
 class Conversa extends Component {
 
-  _enviaMensagem(){
-    const { mensagem, nome, email } = this.props;
+  _enviaMensagem(navigation){
+    
+    var nome = navigation.getParam('name');
+    var email = navigation.getParam('email');
 
-    this.props.enviaMensagem(this.props.mensagem);
+    const { mensagem } = this.props;
+    
+    this.props.enviaMensagem(mensagem, nome, email);
   }
-
+  
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: navigation.getParam('name'),
@@ -33,11 +37,11 @@ class Conversa extends Component {
               value={ this.props.mensagem }
               onChangeText={ text => this.props.digitaMensagem(text) }
               returnKeyType={ 'done' }
-              onSubmitEditing={ () => { this._enviaMensagem() } }
+              onSubmitEditing={ () => this._enviaMensagem(this.props.navigation) }
             />
 
             <TouchableHighlight 
-              onPress={ () => { this._enviaMensagem() } } 
+              onPress={ () => this._enviaMensagem(this.props.navigation) } 
               style={{ backgroundColor: '#13665a', width: 50, height: 50, alignItems: 'center', justifyContent: "center", borderRadius: 100, marginLeft: 5 }}
             >
               <Image 
