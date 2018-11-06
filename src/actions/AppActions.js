@@ -11,6 +11,7 @@ import {
     LISTA_CONTATO_USUARIO,
     DIGITA_MENSAGEM,
     ENVIA_MENSAGEM,
+    LISTA_CONVERSA_USUARIO
 } from './types';
 
 import b64 from 'base-64';
@@ -164,5 +165,22 @@ export const enviaMensagem = (mensagem, nome, email) => {
                             })
                     })
             })
+    }
+}
+
+export const conversaUsuarioFetch = contatoEmail => {
+    
+    const { currentUser } = firebase.auth();
+
+    let usuarioEmailB64 = b64.encode(currentUser.email);
+    let contatoEmailB64 = b64.encode(contatoEmail); 
+    
+    return dispatch => {
+        firebase
+            .database()
+            .ref(`/mensagens/${usuarioEmailB64}/${contatoEmailB64}`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_CONVERSA_USUARIO, payload: snapshot.val() })
+            });
     }
 }
