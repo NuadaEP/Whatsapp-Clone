@@ -30,11 +30,17 @@ class Conversa extends Component {
   }
 
   renderRow(texto) {
+    if(texto.tipo == 'e') {
+      return(
+        <View style={{ alignItems:"flex-end", marginTop: 5, marginBottom:5, marginLeft: 40, marginRight:5 }}>
+          <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#ddf5b4', elevation: 1, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderBottomRightRadius: 20 }}>{texto.mensagem}</Text>
+        </View>
+      )
+    }
     //this texto recived comes to dataSource attribute, each data is automatically passed to renderRow 
     return(
-      <View>
-        <Text>{texto.mensagem}</Text>
-        <Text>{texto.tipo}</Text>
+      <View style={{ alignItems:"flex-start", marginTop: 5, marginBottom:5, marginRight: 40, marginLeft: 5 }}>
+        <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#f7f7f7', elevation: 1, borderBottomLeftRadius: 20, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>{texto.mensagem}</Text>
       </View>
     )
   }

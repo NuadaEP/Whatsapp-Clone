@@ -24,6 +24,9 @@ export default ( state = INITIAL_STATE, action ) => {
         case 'digita_mensagem':
             return { ...state, mensagem: action.payload }
 
+        case 'envia_mensagem':
+            return { ...state, mensagem: '' }
+
         default:
             return state;
     }
