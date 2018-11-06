@@ -139,7 +139,30 @@ export const enviaMensagem = (mensagem, nome, email) => {
                     .database()
                     .ref(`/mensagens/${contactEmailB64}/${userEmailB64}`)
                     .push({ mensagem: mensagem, tipo: 'r' })
-                    .then( () => dispatch ({ type: ENVIA_MENSAGEM }) )
-            } )
+                    .then(() => dispatch ({ type: ENVIA_MENSAGEM }))
+                    .then(() => {
+                        firebase
+                            .database()
+                            .ref(`/usuario_conversas/${userEmailB64}/${contactEmailB64}`)
+                            .set({ nome: nome, email: email, mensagem: mensagem })
+                            .then(() => {
+                                firebase
+                                    .database()
+                                    .ref(`/contatos/${userEmailB64}`)
+                                    .once('value')
+                                    .then(snapshot => {
+        
+                                        //this instruction will return a object, and how can I know what the unique key of document at firebase?
+                                        //I can't. Then I use the lowdash to convert this object into array and from this I can access this path with 0 index
+                                        const dadosUsuario = _.first(_.values(snapshot.val()));
+                
+                                        firebase
+                                            .database()
+                                            .ref(`/usuario_conversas/${contactEmailB64}/${userEmailB64}`)
+                                            .set({ nome: dadosUsuario.nome, email:userEmail, mensagem: mensagem })
+                                    })
+                            })
+                    })
+            })
     }
 }

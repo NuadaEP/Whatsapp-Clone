@@ -3,7 +3,7 @@ const INITIAL_STATE = {
     add_contato_sucesso: false,
     add_contato_erro: '',
     loading: false,
-    mensagem: '',
+    mensagem: 'oi',
 
 };
 
