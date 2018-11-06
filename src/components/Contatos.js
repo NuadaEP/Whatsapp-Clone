@@ -40,7 +40,7 @@ class Contatos extends Component {
               <ListView  
                 enableEmptySections
                 dataSource={ this.fonteDeDados }
-                renderRow={ ( data ) => {
+                renderRow={ data => {
                     return (
                       <View>
                         <ListViewData name={data.nome} email={data.email} navigation={this.props.navigation} />
