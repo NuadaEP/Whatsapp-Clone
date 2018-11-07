@@ -70,7 +70,8 @@ class Conversa extends Component {
             <ListView 
                 enableEmptySections
                 dataSource={this.dataSource}
-                renderRow={this.renderRow}    
+                renderRow={this.renderRow}   
+                
             />
           
           </View>
