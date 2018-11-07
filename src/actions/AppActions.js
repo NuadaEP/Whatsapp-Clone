@@ -11,7 +11,8 @@ import {
     LISTA_CONTATO_USUARIO,
     DIGITA_MENSAGEM,
     ENVIA_MENSAGEM,
-    LISTA_CONVERSA_USUARIO
+    LISTA_CONVERSA_USUARIO,
+    LISTA_CONVERSAS_USUARIO
 } from './types';
 
 import b64 from 'base-64';
@@ -144,7 +145,7 @@ export const enviaMensagem = (mensagem, nome, email) => {
                     .then(() => {
                         firebase
                             .database()
-                            .ref(`/usuario_conversas/${userEmailB64}`)
+                            .ref(`/usuario_conversas/${userEmailB64}//${contactEmailB64}`)
                             .set({ nome: nome, email: email, mensagem: mensagem })
                             .then(() => {
                                 firebase
@@ -159,7 +160,7 @@ export const enviaMensagem = (mensagem, nome, email) => {
                 
                                         firebase
                                             .database()
-                                            .ref(`/usuario_conversas/${contactEmailB64}`)
+                                            .ref(`/usuario_conversas/${contactEmailB64}/${userEmailB64}`)
                                             .set({ nome: dadosUsuario.nome, email:userEmail, mensagem: mensagem })
                                     })
                             })
@@ -188,15 +189,14 @@ export const conversaUsuarioFetch = contatoEmail => {
 export const conversasUsuarioFetch = () => {
     const { currentUser } = firebase.auth();
 
-    let userEmailB64 = n64.encode(currentUser.email);
+    let userEmailB64 = b64.encode(currentUser.email);
     
     return dispatch => {
         firebase
             .database()
             .ref(`/usuario_conversas/${userEmailB64}`)
             .on("value", snapshot => {
-                console.log(snapshot);
-                // dispatch({ type: LISTA_CONVERSAS_USUARIO, payload: snapshot.val() })
+                dispatch({ type: LISTA_CONVERSAS_USUARIO, payload: snapshot.val() })
             })
     }
 }

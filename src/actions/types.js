@@ -14,4 +14,4 @@ export const LISTA_CONTATO_USUARIO = 'lista_contato_usuario';
 export const DIGITA_MENSAGEM = 'digita_mensagem';
 export const ENVIA_MENSAGEM = 'envia_mensagem';
 export const LISTA_CONVERSA_USUARIO = 'lista_conversa_usuario';
-export const LISTA_CONVERSAs_USUARIO = 'lista_conversas_usuario';
+export const LISTA_CONVERSAS_USUARIO = 'lista_conversas_usuario';
