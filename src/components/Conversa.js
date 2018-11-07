@@ -1,11 +1,49 @@
 import React, { Component } from 'react'
-import { View, Text, ImageBackground, TextInput, Image, TouchableHighlight } from 'react-native';
+import { View, Text, ImageBackground, TextInput, Image, TouchableHighlight, ListView } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { digitaMensagem, enviaMensagem } from '../actions/AppActions';
+import _ from 'lodash';
+
+import { digitaMensagem, enviaMensagem, conversaUsuarioFetch } from '../actions/AppActions';
 
 class Conversa extends Component {
+
+  componentWillMount() {
+
+    var email = this.props.navigation.getParam('email');
+
+    this.props.conversaUsuarioFetch(email);
+
+    this.criaFonteDeDados(this.props.conversa); 
+
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.criaFonteDeDados(nextProps.conversa);
+  }
+
+  criaFonteDeDados(conversa){
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !==r2 });
+
+    this.dataSource = ds.cloneWithRows(conversa);
+  }
+
+  renderRow(texto) {
+    if(texto.tipo == 'e') {
+      return(
+        <View style={{ alignItems:"flex-end", marginTop: 5, marginBottom:5, marginLeft: 40, marginRight:5 }}>
+          <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#ddf5b4', elevation: 1, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderBottomRightRadius: 20 }}>{texto.mensagem}</Text>
+        </View>
+      )
+    }
+    //this texto recived comes to dataSource attribute, each data is automatically passed to renderRow 
+    return(
+      <View style={{ alignItems:"flex-start", marginTop: 5, marginBottom:5, marginRight: 40, marginLeft: 5 }}>
+        <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#f7f7f7', elevation: 1, borderBottomLeftRadius: 20, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>{texto.mensagem}</Text>
+      </View>
+    )
+  }
 
   _enviaMensagem(navigation){
     
@@ -26,7 +64,16 @@ class Conversa extends Component {
     return (
 
       <ImageBackground style={{ flex: 1, width: null }} source={ require('../images/bg-in.png') }>
+          
           <View style={{ flex:1, paddingBottom: 20 }}>
+          
+            <ListView 
+                enableEmptySections
+                dataSource={this.dataSource}
+                renderRow={this.renderRow}   
+                
+            />
+          
           </View>
 
           <View style={{ flexDirection: 'row', height: 60, padding: 10, marginBottom: 10 }}>
@@ -55,11 +102,19 @@ class Conversa extends Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    mensagem: state.AppReducer.mensagem,
-  }
-)
+const mapStateToProps = state => {
+  const conversa = _.map(state.ListaConversaReducer, (val, uid) => {
+    return { ...val, uid }
+  });
+
+  console.log(conversa);
+
+    return ({
+      conversa: conversa,
+      mensagem: state.AppReducer.mensagem,
+
+    })
+}
 
 
-export default connect(mapStateToProps, { digitaMensagem, enviaMensagem })(Conversa);
+export default connect(mapStateToProps, { digitaMensagem, enviaMensagem, conversaUsuarioFetch })(Conversa);

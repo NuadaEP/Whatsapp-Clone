@@ -34,7 +34,7 @@ class Principal extends Component {
   }
   
   _Conversas = () => (
-    <Conversas />
+    <Conversas navigation={this.props.navigation}/>
   );
   _Contatos = () => (
     <Contatos navigation={this.props.navigation}/>
