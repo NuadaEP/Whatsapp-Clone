@@ -1,69 +1,76 @@
-import React, { Component } from 'react';
-import { View, StatusBar, ListView, ImageBackground, ScrollView } from 'react-native';
+import React, { Component } from "react";
+import {
+  View,
+  StatusBar,
+  ListView,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
 
-import ListViewData from './SubComponents/ListViewData';
+import ListViewData from "./SubComponents/ListViewData";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import _ from 'lodash';
+import _ from "lodash";
 
-import { contatosUsuarioFetch } from '../actions/AppActions';
+import { contatosUsuarioFetch } from "../actions/AppActions";
 
 class Contatos extends Component {
-
-  //this native function is executed just one time, on the moment of the mount component
-  componentWillMount(){
+  componentWillMount() {
     this.props.contatosUsuarioFetch();
 
-    this.criaFonteDeDados( this.props.contatos );
-
+    this.criaFonteDeDados(this.props.contatos);
   }
 
-  //this native function is just executed when have a diferent value to the props, so the first load of this component dont will execute
-  componentWillReceiveProps(nextProps){
-    this.criaFonteDeDados( nextProps.contatos );
+  componentWillReceiveProps(nextProps) {
+    this.criaFonteDeDados(nextProps.contatos);
   }
 
-  criaFonteDeDados( contatos ){ 
-
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
-    this.fonteDeDados = ds.cloneWithRows( contatos );
-    
-  }
-  
-  render() {
-    return (  
-      <ImageBackground style={{ flex: 1, width: null }} source={ require('../images/bg-in.png') }>
-        <ScrollView>
-              <StatusBar backgroundColor="#114d44" /> 
-              <ListView  
-                enableEmptySections
-                dataSource={ this.fonteDeDados }
-                renderRow={ data => {
-                    return (
-                      <View>
-                        <ListViewData name={data.nome} email={data.email} navigation={this.props.navigation} />
-                      </View>
-                    )
-                  } 
-                }
-              />
-        </ScrollView>
-      </ImageBackground>
-    )
-  }
-}
-
-const MapStateToProps = state => {
-
-    const contatos = _.map(state.ListaContatosReducer, (val, uid) => {
-      return { ...val, uid }
+  criaFonteDeDados(contatos) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
 
-  return{
-    contatos: contatos,
+    this.fonteDeDados = ds.cloneWithRows(contatos);
+  }
+
+  render() {
+    return (
+      <ImageBackground
+        style={{ flex: 1, width: null }}
+        source={require("../images/bg-in.png")}
+      >
+        <ScrollView>
+          <StatusBar backgroundColor="#114d44" />
+          <ListView
+            enableEmptySections
+            dataSource={this.fonteDeDados}
+            renderRow={(data) => {
+              return (
+                <View>
+                  <ListViewData
+                    name={data.nome}
+                    email={data.email}
+                    navigation={this.props.navigation}
+                  />
+                </View>
+              );
+            }}
+          />
+        </ScrollView>
+      </ImageBackground>
+    );
   }
 }
+
+const MapStateToProps = (state) => {
+  const contatos = _.map(state.ListaContatosReducer, (val, uid) => {
+    return { ...val, uid };
+  });
+
+  return {
+    contatos: contatos,
+  };
+};
 
 export default connect(MapStateToProps, { contatosUsuarioFetch })(Contatos);
