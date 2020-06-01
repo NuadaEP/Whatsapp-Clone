@@ -11,8 +11,8 @@ import {
 
 const INITIAL_STATE = {
   nome: "",
-  email: "bruno@liveonsolutions.com",
-  senha: "123456",
+  email: "",
+  senha: "",
   erroCadastro: "",
   sucessoCadastro: "",
   loginErro: "",
